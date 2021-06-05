@@ -1,11 +1,11 @@
 # TravClan
 
-Download the Folder
+  Download the Folder
 
-Open In Any code editor and Open Command Prompt
+  Open In Any code editor and Open Command Prompt
 
-Change drive to travclan - cd travclan
+  Change drive to travclan - cd travclan
 
-Run npm i
+  Run npm i
 
-Run npm start
+  Run npm start

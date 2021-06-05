@@ -2,21 +2,41 @@
 
 body,html{
   background-color: #f4f4f4;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Oswald', sans-serif !important;
+}
+.MuiTableCell-root{
+  font-family: 'Oswald', sans-serif !important;
 }
 
 #root{
   width: 90%;
   margin: 0 auto;
 }
-.singleBidder{
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 20px;
+.MuiPaper-root{
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+.MuiTable-root{
+  border-spacing: 0px 15px !important;
+  border-collapse: separate !important;
+}
+.MuiTableRow-root{
   background-color: #50C878;
-  border-radius: 10px;
+  
+}
+.MuiTableCell-head{
+  font-weight: bold !important;
+}
+.MuiTableCell-root{
+  font-size: 1rem !important; 
+}
+td:first-child,
+th:first-child {
+  border-radius: 10px 0 0 10px;
+}
+td:last-child,
+th:last-child {
+  border-radius: 0 10px 10px 0;
 }
 .toggleButton{
   text-align: right;

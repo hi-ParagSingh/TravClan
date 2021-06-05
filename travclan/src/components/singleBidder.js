@@ -65,9 +65,6 @@ const SingleBidder = (props) => {
 
         var tempArr = [];
         var tempObj = data;
-
-        console.log(tempObj)
-
         for (let i = 0; i < tempObj.length; i++) {
             tempArr.push(bidCalculator(tempObj[i].bids));
         }
@@ -125,7 +122,7 @@ const SingleBidder = (props) => {
                                 <TableCell align="left">{row.phone}</TableCell>
                                 <TableCell align="left">{row.hasPremium.toString().toUpperCase()}</TableCell>
                                 <TableCell align="left">{bidCalculator(row.bids)}</TableCell>
-                                <TableCell align="left"><Link to={'/bidder/' + index}><img src={arrow} alt="" /></Link></TableCell>
+                                <TableCell align="left"><Link to={`/bidder/${row.id}`}><img src={arrow} alt="" /></Link></TableCell>
                             </TableRow>
                         ))}
                 </TableBody>

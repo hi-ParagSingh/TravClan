@@ -7,20 +7,20 @@ const BidderProfile = ({match}) => {
         fetchItems();
     }, []);
 
-    const [data, setData] = useState([]);
+    const [item, setItem] = useState([]);
     
     const fetchItems = async () => {
         const fetchItem = await fetch(`https://intense-tor-76305.herokuapp.com/merchants/${match.params.id}`);
-        const data = await fetchItem.json();
-        console.log(data);
-        setData(data);
+        const item = await fetchItem.json();
+        console.log(item);
+        setItem(item);
         
     }
     
     return (
         <div className="userProfile">
             <div>
-                <img src={data.avatarUrl} alt="" className="userProfileImage"/>
+                <img src={item.avatarUrl} alt="" className="userProfileImage"/>
             </div>
             <div className="userGrid">
                 <div className="">
@@ -33,13 +33,13 @@ const BidderProfile = ({match}) => {
                     <div>All Bids</div>
                 </div>
                 <div className="">
-                    <div>{data.id}</div>
-                    <div>{data.firstname}</div>
-                    <div>{data.lastname}</div>
-                    <div>{data.email}</div>
-                    <div>{data.phone}</div>
-                    {/* <div>{data.hasPremium.toString().toUpperCase()}</div> */}
-                    {/* <div>{data.bids.map(element => {
+                    <div>{item.id}</div>
+                    <div>{item.firstname}</div>
+                    <div>{item.lastname}</div>
+                    <div>{item.email}</div>
+                    <div>{item.phone}</div>
+                    {/* <div>{item.hasPremium.toString().toUpperCase()}</div>
+                    <div>{item.bids.map(element => {
                        return element.amount + ", ";  
                     })}</div> */}
                 </div>

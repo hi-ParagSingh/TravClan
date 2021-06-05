@@ -28,47 +28,47 @@ const SingleBidder = (props) => {
             email: "psparag1997@gmail.com",
             phone: "+918295921803",
             hasPremium: true,
-            bids: [11111, 145555, 1121212]
+            bids: [1100, 400, 900]
         },
         {
             userId: 102,
             imageSrc: user,
-            firstName: 'Parag',
-            lastName: "Singh",
-            email: "psparag1997@gmail.com",
-            phone: "+918295921803",
+            firstName: 'Reyansh',
+            lastName: "Sharma",
+            email: "sharma@gmail.com",
+            phone: "+918295921800",
             hasPremium: true,
-            bids: [11111, 145555, 1121212]
+            bids: [3000,12,65]
         },
         {
             userId: 103,
             imageSrc: user,
-            firstName: 'Parag',
+            firstName: 'Sweta',
             lastName: "Singh",
-            email: "psparag1997@gmail.com",
-            phone: "+918295921803",
-            hasPremium: true,
-            bids: [11111, 145555, 1121212]
+            email: "sweta23@gmail.com",
+            phone: "+919295921803",
+            hasPremium: false,
+            bids: [250,110,9]
         },
         {
             userId: 104,
             imageSrc: user,
-            firstName: 'Parag',
+            firstName: 'Preeti',
             lastName: "Singh",
-            email: "psparag1997@gmail.com",
-            phone: "+918295921803",
+            email: "preeti@gmail.com",
+            phone: "+918292321803",
             hasPremium: true,
-            bids: [11111, 145555, 1121212]
+            bids: [10,4,90]
         },
         {
             userId: 105,
             imageSrc: user,
-            firstName: 'Parag',
-            lastName: "Singh",
-            email: "psparag1997@gmail.com",
-            phone: "+918295921803",
-            hasPremium: true,
-            bids: [11111, 145555, 1121212]
+            firstName: 'Gargi',
+            lastName: "Tariyal",
+            email: "gargi@gmail.com",
+            phone: "+918295921823",
+            hasPremium: false,
+            bids: [1,200,800]
         },
     ];
 
@@ -83,10 +83,38 @@ const SingleBidder = (props) => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
-    const emptyRows =
-        rowsPerPage - Math.min(rowsPerPage, apiRes.length - page * rowsPerPage);
 
+    (()=>{
 
+        var tempArr = [];
+        var tempObj = apiRes;
+
+        for(let i=0; i < tempObj.length; i++){
+            tempArr.push(props.toogleState ? Math.max(...tempObj[i].bids) : Math.min(...tempObj[i].bids));
+        }
+         
+        for(let i = 0; i < tempObj.length; i++) {
+            let min = i;
+            for(let j = i+1; j < tempObj.length; j++){
+                if(tempArr[j] < tempArr[min]) {
+                    min=j; 
+                }
+             }
+             if (min !== i) {
+                 let tmp = tempArr[i]; 
+                 tempArr[i] = tempArr[min];
+                 tempArr[min] = tmp;  
+                 
+                 let temp = tempObj[i];
+                 tempObj[i] = tempObj[min];
+                 tempObj[min] = temp;
+
+            }
+        }
+        console.log(tempObj);
+
+    })();
+    
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
@@ -107,11 +135,11 @@ const SingleBidder = (props) => {
                     {apiRes
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((row, index) => (
-                            <TableRow key={row.name}>
+                            <TableRow key={index}>
                                 <TableCell component="th" scope="row">
                                     {row.userId}
                                 </TableCell>
-                                <TableCell align="left"><img src={row.imageSrc} alt="" srcset="" className="userImage"/></TableCell>
+                                <TableCell align="left"><img src={row.imageSrc} alt="" className="userImage"/></TableCell>
                                 <TableCell align="left">{row.firstName}</TableCell>
                                 <TableCell align="left">{row.lastName}</TableCell>
                                 <TableCell align="left">{row.email}</TableCell>

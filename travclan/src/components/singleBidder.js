@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect , useState } from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,7 +9,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
 import arrow from '../assets/right.svg';
-import user from '../assets/user.png';
 import { Link } from 'react-router-dom';
 
 
@@ -21,66 +20,17 @@ const useStyles = makeStyles({
 
 const SingleBidder = (props) => {
 
-    var apiRes = [
-        {
-            userId: 101,
-            imageSrc: user,
-            firstName: 'Parag',
-            lastName: "Singh",
-            email: "psparag1997@gmail.com",
-            phone: "+918295921803",
-            hasPremium: true,
-            bids: [1100, 400, 900]
-        },
-        {
-            userId: 102,
-            imageSrc: user,
-            firstName: 'Reyansh',
-            lastName: "Sharma",
-            email: "sharma@gmail.com",
-            phone: "+918295921800",
-            hasPremium: true,
-            bids: [3000, 12, 65]
-        },
-        {
-            userId: 103,
-            imageSrc: user,
-            firstName: 'Sweta',
-            lastName: "Singh",
-            email: "sweta23@gmail.com",
-            phone: "+919295921803",
-            hasPremium: false,
-            bids: [250, 110, 9]
-        },
-        {
-            userId: 104,
-            imageSrc: user,
-            firstName: 'Preeti',
-            lastName: "Singh",
-            email: "preeti@gmail.com",
-            phone: "+918292321803",
-            hasPremium: true,
-            bids: [10, 4, 90]
-        },
-        {
-            userId: 105,
-            imageSrc: user,
-            firstName: 'Gargi',
-            lastName: "Tariyal",
-            email: "gargi@gmail.com",
-            phone: "+918295921823",
-            hasPremium: false,
-            bids: [1, 200, 800]
-        },
-    ];
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         fetchItems();
     }, []);
 
     const fetchItems = async () => {
-        // var apiRes = await fetch(`https://intense-tor-76305.herokuapp.com/merchants%60`);
-        // apiRes = await apiRes.json();
+        const fetchItem = await fetch(`https://intense-tor-76305.herokuapp.com/merchants`);
+        
+        const data = await fetchItem.json();
+        setData(data);
     }
 
     const classes = useStyles();
@@ -95,13 +45,31 @@ const SingleBidder = (props) => {
         setPage(0);
     };
 
+    function bidCalculator(bid){
+        var tempMaxMin = [];
+        bid.forEach(element => {
+           tempMaxMin.push(element.amount);
+        });
+
+        if(tempMaxMin.length === 0){
+            return 0; 
+        }
+
+        else{
+            return props.toogleState ? Math.max(...tempMaxMin) : Math.min(...tempMaxMin);
+        }
+    
+    }
+    
     (() => {
 
         var tempArr = [];
-        var tempObj = apiRes;
+        var tempObj = data;
+
+        console.log(tempObj)
 
         for (let i = 0; i < tempObj.length; i++) {
-            tempArr.push(props.toogleState ? Math.max(...tempObj[i].bids) : Math.min(...tempObj[i].bids));
+            tempArr.push(bidCalculator(tempObj[i].bids));
         }
 
         for (let i = 0; i < tempObj.length; i++) {
@@ -142,20 +110,21 @@ const SingleBidder = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {apiRes
+                    {data
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((row, index) => (
                             <TableRow key={index}>
+                               
                                 <TableCell component="th" scope="row">
-                                    {row.userId}
+                                    {row.id}
                                 </TableCell>
-                                <TableCell align="left"><img src={row.imageSrc} alt="" className="userImage" /></TableCell>
-                                <TableCell align="left">{row.firstName}</TableCell>
-                                <TableCell align="left">{row.lastName}</TableCell>
+                                <TableCell align="left"><img src={row.avatarUrl} alt="" className="userImage" /></TableCell>
+                                <TableCell align="left">{row.firstname}</TableCell>
+                                <TableCell align="left">{row.lastname}</TableCell>
                                 <TableCell align="left">{row.email}</TableCell>
                                 <TableCell align="left">{row.phone}</TableCell>
                                 <TableCell align="left">{row.hasPremium.toString().toUpperCase()}</TableCell>
-                                <TableCell align="left">{props.toogleState ? Math.max(...row.bids) : Math.min(...row.bids)}</TableCell>
+                                <TableCell align="left">{bidCalculator(row.bids)}</TableCell>
                                 <TableCell align="left"><Link to={'/bidder/' + index}><img src={arrow} alt="" /></Link></TableCell>
                             </TableRow>
                         ))}
@@ -164,7 +133,7 @@ const SingleBidder = (props) => {
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={apiRes.length}
+                count={data.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}

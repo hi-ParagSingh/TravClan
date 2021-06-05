@@ -1,7 +1,7 @@
 import Bidder from "./components/SingleBidder"
 import React from "react";
 import { Switch as Sw } from '@material-ui/core';
-import BidderProfile from './bidderProfile';
+import BidderProfile from './BidderProfile';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {

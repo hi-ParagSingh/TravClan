@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-const bidderProfile = () => {
+const BidderProfile = (match) => {
+    useEffect(() => {
+      
+    }, [])
+    
     return (
         <div>
             Hello
@@ -8,4 +12,4 @@ const bidderProfile = () => {
     )
 }
 
-export default bidderProfile
+export default BidderProfile

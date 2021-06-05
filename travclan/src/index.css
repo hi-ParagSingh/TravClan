@@ -1,13 +1,30 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+body,html{
+  background-color: #f4f4f4;
+  font-family: 'Oswald', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root{
+  width: 90%;
+  margin: 0 auto;
+}
+.singleBidder{
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #50C878;
+  border-radius: 10px;
+}
+.toggleButton{
+  text-align: right;
+  margin-bottom: 20px;
+}
+.MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track{
+  background-color: #50C878 !important;
+}
+.MuiSwitch-colorSecondary.Mui-checked{
+  color: #50C878 !important;
 }

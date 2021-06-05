@@ -1,12 +1,24 @@
 import Bidder from "./components/SingleBidder"
-import React, { useEffect } from "react";
-import { Switch } from '@material-ui/core';
-
-
+import React from "react";
+import { Switch as Sw } from '@material-ui/core';
+import BidderProfile from './bidderProfile';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
-  
- 
+
+  return (
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/bidder/:id" exact component={BidderProfile} />
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+const Home = () => {
   const [state, setState] = React.useState({
     checkedA: true,
   });
@@ -14,23 +26,9 @@ function App() {
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
-
-  useEffect(() => {
-    fetch(
-      `https://intense-tor-76305.herokuapp.com/merchants%60`,
-      {
-        method: "GET",
-      }
-    )
-      .then(res => res.json())
-      .then(response => {
-        // apiRes = response;
-      })
-  }, []);
-
   return (
-    <div className="App">
-      <div className="toggleButton">Show Highest Bids<Switch
+    <div>
+      <div className="toggleButton">Show Highest Bids<Sw
         checked={state.checkedA}
         onChange={handleChange}
         name="checkedA"
@@ -38,7 +36,8 @@ function App() {
       /></div>
       <Bidder toogleState={state.checkedA}></Bidder>
     </div>
-  );
+  )
+
 }
 
 export default App;

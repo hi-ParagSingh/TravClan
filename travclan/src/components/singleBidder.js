@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,9 +8,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
-import { Button } from '@material-ui/core';
-import arrow from '../assets/right.svg'
-import user from '../assets/user.png'
+import arrow from '../assets/right.svg';
+import user from '../assets/user.png';
+import { Link } from 'react-router-dom';
+
+
 const useStyles = makeStyles({
     table: {
         minWidth: 650
@@ -38,7 +40,7 @@ const SingleBidder = (props) => {
             email: "sharma@gmail.com",
             phone: "+918295921800",
             hasPremium: true,
-            bids: [3000,12,65]
+            bids: [3000, 12, 65]
         },
         {
             userId: 103,
@@ -48,7 +50,7 @@ const SingleBidder = (props) => {
             email: "sweta23@gmail.com",
             phone: "+919295921803",
             hasPremium: false,
-            bids: [250,110,9]
+            bids: [250, 110, 9]
         },
         {
             userId: 104,
@@ -58,7 +60,7 @@ const SingleBidder = (props) => {
             email: "preeti@gmail.com",
             phone: "+918292321803",
             hasPremium: true,
-            bids: [10,4,90]
+            bids: [10, 4, 90]
         },
         {
             userId: 105,
@@ -68,9 +70,18 @@ const SingleBidder = (props) => {
             email: "gargi@gmail.com",
             phone: "+918295921823",
             hasPremium: false,
-            bids: [1,200,800]
+            bids: [1, 200, 800]
         },
     ];
+
+    useEffect(() => {
+        fetchItems();
+    }, []);
+
+    const fetchItems = async () => {
+        // var apiRes = await fetch(`https://intense-tor-76305.herokuapp.com/merchants%60`);
+        // apiRes = await apiRes.json();
+    }
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
@@ -84,37 +95,36 @@ const SingleBidder = (props) => {
         setPage(0);
     };
 
-    (()=>{
+    (() => {
 
         var tempArr = [];
         var tempObj = apiRes;
 
-        for(let i=0; i < tempObj.length; i++){
+        for (let i = 0; i < tempObj.length; i++) {
             tempArr.push(props.toogleState ? Math.max(...tempObj[i].bids) : Math.min(...tempObj[i].bids));
         }
-         
-        for(let i = 0; i < tempObj.length; i++) {
+
+        for (let i = 0; i < tempObj.length; i++) {
             let min = i;
-            for(let j = i+1; j < tempObj.length; j++){
-                if(tempArr[j] < tempArr[min]) {
-                    min=j; 
+            for (let j = i + 1; j < tempObj.length; j++) {
+                if (tempArr[j] < tempArr[min]) {
+                    min = j;
                 }
-             }
-             if (min !== i) {
-                 let tmp = tempArr[i]; 
-                 tempArr[i] = tempArr[min];
-                 tempArr[min] = tmp;  
-                 
-                 let temp = tempObj[i];
-                 tempObj[i] = tempObj[min];
-                 tempObj[min] = temp;
+            }
+            if (min !== i) {
+                let tmp = tempArr[i];
+                tempArr[i] = tempArr[min];
+                tempArr[min] = tmp;
+
+                let temp = tempObj[i];
+                tempObj[i] = tempObj[min];
+                tempObj[min] = temp;
 
             }
         }
-        console.log(tempObj);
 
     })();
-    
+
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="simple table">
@@ -139,14 +149,14 @@ const SingleBidder = (props) => {
                                 <TableCell component="th" scope="row">
                                     {row.userId}
                                 </TableCell>
-                                <TableCell align="left"><img src={row.imageSrc} alt="" className="userImage"/></TableCell>
+                                <TableCell align="left"><img src={row.imageSrc} alt="" className="userImage" /></TableCell>
                                 <TableCell align="left">{row.firstName}</TableCell>
                                 <TableCell align="left">{row.lastName}</TableCell>
                                 <TableCell align="left">{row.email}</TableCell>
                                 <TableCell align="left">{row.phone}</TableCell>
                                 <TableCell align="left">{row.hasPremium.toString().toUpperCase()}</TableCell>
                                 <TableCell align="left">{props.toogleState ? Math.max(...row.bids) : Math.min(...row.bids)}</TableCell>
-                                <TableCell align="left"><Button variant="text"><img src={arrow} alt="" /></Button></TableCell>
+                                <TableCell align="left"><Link to={'/bidder/' + index}><img src={arrow} alt="" /></Link></TableCell>
                             </TableRow>
                         ))}
                 </TableBody>

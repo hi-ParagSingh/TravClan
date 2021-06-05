@@ -28,7 +28,7 @@ html {
 }
 
 .MuiTableRow-root {
-  background-color: #50C878;
+  background: linear-gradient(#e66465, #9198e5);
 
 }
 
@@ -56,11 +56,11 @@ th:last-child {
 }
 
 .MuiSwitch-colorSecondary.Mui-checked+.MuiSwitch-track {
-  background-color: #50C878 !important;
+  background: linear-gradient(#e66465, #9198e5) !important;
 }
 
 .MuiSwitch-colorSecondary.Mui-checked {
-  color: #50C878 !important;
+  color: linear-gradient(#e66465, #9198e5) !important;
 }
 .userImage{
   width: 50px;
@@ -79,7 +79,7 @@ th:last-child {
 .userProfile{
   width: 60%;
   margin: 0 auto;
-  background-color: #50C878 !important;
+  background: linear-gradient(#e66465, #9198e5) !important;
   border-radius: 10px;
   padding: 50px;
 }

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
 const BidderProfile = ({match}) => {
-    const [data, setData] = useState([]);
+   
 
     useEffect(() => {
         fetchItems();
     }, []);
 
+    const [data, setData] = useState([]);
+    
     const fetchItems = async () => {
         const fetchItem = await fetch(`https://intense-tor-76305.herokuapp.com/merchants/${match.params.id}`);
         const data = await fetchItem.json();
@@ -36,10 +38,10 @@ const BidderProfile = ({match}) => {
                     <div>{data.lastname}</div>
                     <div>{data.email}</div>
                     <div>{data.phone}</div>
-                    <div>{data.hasPremium.toString().toUpperCase()}</div>
-                    <div>{data.bids.map(element => {
-                       return element.amount + ",";  
-                    })}</div>
+                    {/* <div>{data.hasPremium.toString().toUpperCase()}</div> */}
+                    {/* <div>{data.bids.map(element => {
+                       return element.amount + ", ";  
+                    })}</div> */}
                 </div>
             </div>
 

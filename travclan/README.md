@@ -2,7 +2,7 @@
 
 <h2>About Me:</h2>
 
-I'm Parag Singh a seasoned front-end developer with experience in designing and building responsive websites in the financial industry. Proficient with React JS, CSS, JS, and animations, with additional knowledge of UX and user psychology. With a strong sense of detail, high-quality product spirit & aesthetics, well-grounded and aligned towards empirical knowledge.
+I'm Parag Singh a seasoned front-end developer with experience in designing and building responsive websites in the financial industry. Proficient with CSS, JS, and animations, with additional knowledge of UX and user psychology. With a strong sense of detail, high-quality product spirit & aesthetics, well-grounded and aligned towards empirical knowledge.
 
 A fitness enthusiast with an athletic personality. Always up for a friendly football session. Love to travel and meet new people.
 

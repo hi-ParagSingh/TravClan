@@ -1,11 +1,11 @@
 # TravClan
 
-##Download the Folder
+#Download the Folder
 
-##Open the downloaded file in any code editor
+#Open the downloaded file in any code editor
 
-##Change drive to travclan - cd travclan
+#Change drive to travclan - cd travclan
 
-##Run npm i
+#Run npm i
 
-##Run npm start
+#Run npm start

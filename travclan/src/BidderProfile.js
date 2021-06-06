@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react'
 
-const BidderProfile = ({match}) => {
-   
-
+const BidderProfile = ({ match }) => {
     useEffect(() => {
         fetchItems();
+        console.log(item);
     }, []);
 
     const [item, setItem] = useState([]);
-    
-    const fetchItems = async () => {
-        const fetchItem = await fetch(`https://intense-tor-76305.herokuapp.com/merchants/${match.params.id}`);
-        const item = await fetchItem.json();
-        console.log(item);
-        setItem(item);
-        
+
+    const fetchItems = () => {
+        var url = `https://intense-tor-76305.herokuapp.com/merchants/${match.params.id}`;
+        fetch(url)
+            .then(response => response.json())
+            .then((data) => {
+                setItem(data);
+            })  
+
     }
-    
+
     return (
         <div className="userProfile">
             <div>
-                <img src={item.avatarUrl} alt="" className="userProfileImage"/>
+                <img src={item.avatarUrl} alt="" className="userProfileImage" />
             </div>
             <div className="userGrid">
                 <div className="">
@@ -38,10 +39,10 @@ const BidderProfile = ({match}) => {
                     <div>{item.lastname}</div>
                     <div>{item.email}</div>
                     <div>{item.phone}</div>
-                    {/* <div>{item.hasPremium.toString().toUpperCase()}</div>
-                    <div>{item.bids.map(element => {
-                       return element.amount + ", ";  
-                    })}</div> */}
+                    <div>{(" " + item.hasPremium).toUpperCase()}</div>
+                    <div>{item?.bids?.map(element => {
+                        return element.amount + ", ";
+                    })}</div>
                 </div>
             </div>
 

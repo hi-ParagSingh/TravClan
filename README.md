@@ -10,13 +10,9 @@ A fitness enthusiast with an athletic personality. Always up for a friendly foot
 <h2>How to run the project:</h2>
 
 1. Download the Folder
-
 2. Open the downloaded file in any code editor
-
 3. Change drive to travclan - <code>cd travclan</code>
-
 4. Run <code>npm install</code>
-
 5. Run <code>npm start</code>
 
 
